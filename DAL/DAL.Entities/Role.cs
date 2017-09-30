@@ -12,12 +12,6 @@ namespace DAL.Entities
     /// </summary>
     public class Role : EntityBase
     {
-        public Role()
-        {
-            Accounts = new List<Account>();
-            Users = new List<User>();
-        }
-
         public string Name { get; set; }
 
         public string Description { get; set; }

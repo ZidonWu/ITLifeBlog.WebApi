@@ -54,6 +54,20 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\COM\COM.Common\COM.Common.csproj">
+      <Project>{95FC55D3-E856-4D4D-8B59-928B57D13FF5}</Project>
+      <Name>COM.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DAL\DAL.Entities\DAL.Entities.csproj">
+      <Project>{b81041d9-9015-4097-becf-85ef8b4d3053}</Project>
+      <Name>DAL.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BLL.Service\BLL.Service.csproj">
+      <Project>{CD2810AF-3F64-4486-A255-3E5D5446900D}</Project>
+      <Name>BLL.Service</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

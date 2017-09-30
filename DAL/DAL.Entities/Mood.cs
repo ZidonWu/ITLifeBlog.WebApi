@@ -11,11 +11,6 @@ namespace DAL.Entities
     /// </summary>
     public class Mood : EntityBase
     {
-        public Mood()
-        {
-            MoodComments = new List<MoodComment>();
-        }
-
         public string Content { get; set; }
 
         public DateTime CreateTime { get; set; }

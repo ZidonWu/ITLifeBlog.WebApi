@@ -86,7 +86,7 @@ namespace UI.Api.Controllers
         [HttpDelete]
         public OperResult DeleteById(int id)
         {
-            var result = _articleService.UpdateByDelete(id, x => x.IsDelete);
+            var result = _articleService.UpdateByDelete(id, x => x.IsDeleted);
             return result;
         }
 

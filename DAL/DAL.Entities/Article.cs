@@ -11,11 +11,6 @@ namespace DAL.Entities
     /// </summary>
     public class Article : EntityBase
     {
-        public Article()
-        {
-            ArticleComments = new List<ArticleComment>();
-        }
-
         public string ArticleGuid { get; set; }
 
         public string Title { get; set; }
@@ -28,19 +23,19 @@ namespace DAL.Entities
 
         public DateTime? LastUpdateTime { get; set; }
 
-        public int? Stars { get; set; }
+        public int Stars { get; set; }
 
-        public int? ReadNum { get; set; }
+        public int ReadNum { get; set; }
 
-        public int? CommentNum { get; set; }
+        public int CommentNum { get; set; }
 
-        public bool? IsPublish { get; set; }
+        public bool IsPublish { get; set; }
 
-        public bool IsDelete { get; set; }
+        public bool IsDeleted { get; set; }
 
         public int UserId { get; set; }
 
-        public int CategoryId { get; set; }
+        public int CategoryId { get; set; } 
 
         public virtual User User { get; set; }
 

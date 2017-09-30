@@ -11,11 +11,6 @@ namespace DAL.Entities
     /// </summary>
     public class Category :EntityBase
     {
-        public Category()
-        {
-            Articles = new List<Article>();
-        }
-
         public string Name { get; set; }
 
         public string Description { get; set; }

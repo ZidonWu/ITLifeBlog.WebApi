@@ -21,15 +21,15 @@ namespace BLL.Service.ArticleSer
                 Title = model.Title,
                 Description = model.Description,
                 Content = model.Content,
-                CategoryId = model.Category.Id,
                 CommentNum = model.CommentNum,
-                CreateTime = DateTime.Now,
-                IsPublish = true,
-                IsDelete = false,
+                CreateTime = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd")),
+                IsPublish = model.IsPublish,
+                IsDeleted = false,
                 LastUpdateTime = model.LastUpdateTime,
                 ReadNum = model.ReadNum,
                 Stars = model.Stars,
-                UserId = model.UserId
+                UserId = model.UserId,
+                CategoryId = model.CategoryId
             };
             var result = base.Add(article);
             return result;
@@ -52,17 +52,17 @@ namespace BLL.Service.ArticleSer
 
         public IEnumerable<Article> FindAllList()
         {
-            return Repository.FindList().Where(x => x.IsDelete == false);
+            return Repository.FindList().Where(x => x.IsDeleted == false);
         }
 
         public IEnumerable<Article> FindAllList(Expression<Func<Article, bool>> where)
         {
-            return Repository.FindList(where).Where(x => x.IsDelete == false);
+            return Repository.FindList(where).Where(x => x.IsDeleted == false);
         }
 
         public IEnumerable<Article> FindListByUserName(string name)
         {
-            return Repository.FindList(x => x.User.Name == name).Where(y => y.IsDelete == false);
+            return Repository.FindList(x => x.User.Name == name).Where(y => y.IsDeleted == false);
         }
 
         public OperResult UpdateByDelete(int id, Expression<Func<Article, bool>> where)
@@ -76,7 +76,7 @@ namespace BLL.Service.ArticleSer
             }
             else
             {
-                entity.IsDelete = true;
+                entity.IsDeleted = true;
                 Repository.UpdateByDelete(entity, where);
                 if (IUnitOfWork.Commit() > 0)
                 {
@@ -106,7 +106,7 @@ namespace BLL.Service.ArticleSer
             }
             else
             {
-                entity.IsDelete = true;
+                entity.IsDeleted = true;
                 Repository.Update(entity);
                 if (IUnitOfWork.Commit() > 0)
                 {

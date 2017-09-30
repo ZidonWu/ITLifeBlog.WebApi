@@ -11,11 +11,6 @@ namespace DAL.Entities
     /// </summary>
     public class User : EntityBase
     {
-        public User()
-        {
-            Articles = new List<Article>();
-        }
-
         public string Name { get; set; }
 
         public string Password { get; set; }

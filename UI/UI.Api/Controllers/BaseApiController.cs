@@ -10,7 +10,7 @@ using UI.Api.Fitler;
 
 namespace UI.Api.Controllers
 {
-    [RequestAuthorize]
+    //[RequestAuthorize]
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class BaseApiController : ApiController
     {
