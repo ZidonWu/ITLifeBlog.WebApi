@@ -16,8 +16,7 @@ namespace DAL.Entities
 
         public string Description { get; set; }
 
-        public virtual ICollection<Account> Accounts { get; set; }
-
-        public virtual ICollection<User> Users { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<Account> Account { get; set; }       
     }
 }

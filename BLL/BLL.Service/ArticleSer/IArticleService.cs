@@ -17,11 +17,18 @@ namespace BLL.Service.ArticleSer
         IEnumerable<Article> FindAllList(Expression<Func<Article, bool>> where);
 
         /// <summary>
-        /// 根据用户名获取文章集合
+        /// 根据帐户Id获取文章集合
         /// </summary>
-        /// <param name="name"></param>
+        /// <param name="accountId"></param>
         /// <returns></returns>
-        IEnumerable<Article> FindListByUserName(string name);
+        IEnumerable<Article> FindListByAccountId(int accountId);
+
+        /// <summary>
+        /// 根据帐户名获取文章集合
+        /// </summary>
+        /// <param name="accountName"></param>
+        /// <returns></returns>
+        IEnumerable<Article> FindListByAccountName(string accountName); 
 
         /// <summary>
         /// 获取文章总数
@@ -37,11 +44,11 @@ namespace BLL.Service.ArticleSer
         int CountArticle(Expression<Func<Article, bool>> where);
 
         /// <summary>
-        /// 根据用户名获取文章总数
+        /// 根据帐户名获取文章总数
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        int CountArticleByUserName(string name);
+        int CountArticleByAccountName(string accountName);  
 
         /// <summary>
         /// 软删除文章
@@ -50,5 +57,23 @@ namespace BLL.Service.ArticleSer
         /// <param name="where"></param>
         /// <returns></returns>
         OperResult UpdateByDelete(int id, Expression<Func<Article, bool>> where);
+
+        /// <summary>
+        /// 分页 管理
+        /// </summary>
+        /// <param name="paging"></param>
+        /// <param name="where"></param>
+        /// <returns></returns>
+        IQueryable<Article> FindPageList(Paging<Article> paging, string where = "");
+
+        /// <summary>
+        /// Home展示
+        /// </summary>
+        /// <param name="paging"></param>
+        /// <param name="categoryId"></param>
+        /// <returns></returns>
+        IQueryable<Article> FindPageList(Paging<Article> paging, int categoryId = -1);
+
+        IQueryable<Article> FindPageListByAccountId(Paging<Article> paging, int accountId);    
     }
 }

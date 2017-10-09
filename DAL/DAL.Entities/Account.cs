@@ -12,17 +12,13 @@ namespace DAL.Entities
     /// </summary>
     public class Account : EntityBase
     {
-        public string Name { get; set; }
-
+        public string Name { get; set; }     
+            
         public string Password { get; set; }
 
-        public bool? BRes { get; set; }
+        public int RoleId { get; set; } 
 
-        public string Ticket { get; set; }
-
-        public int RoleId { get; set; }
-
+        [JsonIgnore]
         public virtual Role Role { get; set; }
-
     }
 }

@@ -80,6 +80,15 @@ namespace DAL.Repositories
         IQueryable<T> FindList(Expression<Func<T, bool>> where, OrderParam orderParam);
         IQueryable<T> FindList(Expression<Func<T, bool>> where, OrderParam[] orderParam, int number);
 
+        #region page
+        IQueryable<T> FindPageList(int pageSize, int pageIndex, out int totalNumber);
+        IQueryable<T> FindPageList(int pageSize, int pageIndex, out int totalNumber, OrderParam orderParam);
+        IQueryable<T> FindPageList(int pageSize, int pageIndex, out int totalNumber, Expression<Func<T, bool>> where);
+        IQueryable<T> FindPageList(int pageSize, int pageIndex, out int totalNumber, Expression<Func<T, bool>> where, OrderParam orderParam);
+        IQueryable<T> FindPageList(int pageSize, int pageIndex, out int totalNumber, Expression<Func<T, bool>> where, OrderParam[] orderParams);
+        IQueryable<T> FindPageList(int pageSize, int pageIndex, out int totalNumber, bool asc);
+        #endregion
+
         /// <summary>
         /// 获得总数
         /// </summary>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,10 +17,6 @@ namespace DAL.Entities
         public string Password { get; set; }
 
         public DateTime CreateTime { get; set; }
-
-        public int RoleId { get; set; }
-
-        public virtual ICollection<Article> Articles { get; set; }
 
         public virtual Role Role { get; set; }
     }

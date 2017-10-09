@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,9 +26,9 @@ namespace DAL.Entities
 
         public DateTime CreateTime { get; set; }
 
-        public int UserId { get; set; }
-            
-        public virtual User User { get; set; }
+        public int AccountId { get; set; }
 
+        [JsonIgnore]
+        public virtual Account Account { get; set; }
     }
 }

@@ -6,9 +6,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Reflection;
 using System.Web;
 using System.Web.Http;
 using System.Web.Security;
+using UI.Api.Models;
 
 namespace UI.Api.Controllers
 {
@@ -41,12 +43,9 @@ namespace UI.Api.Controllers
 
             FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(0, name, DateTime.Now, DateTime.Now.AddHours(1), true, string.Format("{0}&{1}", name, password), FormsAuthentication.FormsCookiePath);
 
-            var oAccount = new Account { BRes = true, Name = name, Password = password, Ticket = FormsAuthentication.Encrypt(ticket) };
+            var account = _accountService.Find(name);
+            var oAccount = new LoginViewModel { Id = account.Id, Name = name, Password = password, BRes = true, Ticket = FormsAuthentication.Encrypt(ticket), RoleId = account.Role.Id};
             HttpContext.Current.Session[name] = oAccount;
-            //result.Data = oAccount;
-            //result.Code = 1;
-            //result.Flag = true;
-            //result.Message = "请求成功!";
             return oAccount;
         }
 
@@ -70,6 +69,10 @@ namespace UI.Api.Controllers
         public IEnumerable<Account> GetAllList()
         {
             var result = _accountService.FindList();
+            if (result == null)
+            {
+                return null;
+            }
             return result;
         }
 
@@ -103,13 +106,13 @@ namespace UI.Api.Controllers
         /// <param name="account"></param>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpPut]
+        [HttpPost]
         public OperResult UpdateById([FromBody]Account account, int id)
         {
             var result = _accountService.Find(id);
             result.Name = account.Name;
             result.Password = account.Password;
-            result.RoleId = account.RoleId;
+            result.Role = account.Role;
             var result2 = _accountService.Update(result);
             return result2;
         }
@@ -120,15 +123,29 @@ namespace UI.Api.Controllers
         /// <param name="account"></param>
         /// <param name="name"></param>
         /// <returns></returns>
-        [HttpPut]
+        [HttpPost]
         public OperResult UpdateByName([FromBody]Account account, string name)
         {
             var result = _accountService.Find(name);
             result.Name = account.Name;
             result.Password = account.Password;
-            result.RoleId = account.RoleId;
+            result.Role = account.Role;
             var result2 = _accountService.Update(result);
             return result2;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="account"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public OperResult UpdatePassword(int id, Account account)
+        {
+            var result = _accountService.Find(id);
+            result.Password = account.Password;
+            return _accountService.Update(result);
         }
 
         /// <summary>
@@ -136,7 +153,7 @@ namespace UI.Api.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpDelete]
+        [HttpPost]
         public OperResult DeleteById(int id)
         {
             var result = _accountService.Delete(id);
@@ -148,14 +165,12 @@ namespace UI.Api.Controllers
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
+        [HttpPost]
         public OperResult DeleteByName(string name)
         {
             var result = _accountService.Delete(x => x.Name == name);
             return result;
         }
-
-
-
 
         /// <summary>
         /// 校验用户名密码

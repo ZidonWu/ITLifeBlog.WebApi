@@ -13,7 +13,7 @@ namespace DAL.Core
     {
         public ITLifeBlogDbContext():base("name=ITLifeBlog")
         {
-
+            //this.Configuration.LazyLoadingEnabled = true;
         }
 
         public DbSet<Account> Accounts { get; set; }
@@ -22,17 +22,17 @@ namespace DAL.Core
 
         public DbSet<Article> Articles { get; set; }
 
-        public DbSet<ArticleComment> ArticleComments { get; set; }
+        //public DbSet<ArticleComment> ArticleComments { get; set; }
 
-        public DbSet<User> Users { get; set; }
+        //public DbSet<User> Users { get; set; }
 
         public DbSet<Category> Categories { get; set; }
 
-        public DbSet<Message> Messages { get; set; }
+        //public DbSet<Message> Messages { get; set; }
 
-        public DbSet<Mood> Moods { get; set; }
+        //public DbSet<Mood> Moods { get; set; }
 
-        public DbSet<MoodComment> MoodComments { get; set; }
+        //public DbSet<MoodComment> MoodComments { get; set; }
 
         public int Commit()
         {
@@ -52,6 +52,10 @@ namespace DAL.Core
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            //modelBuilder.Entity<Account>()
+            //.HasRequired<Role>(a => a.Role)
+            //.WithMany(r => r.Accounts)
+            //.HasForeignKey<int>(a => a.RoleId);
         }
     }
 }

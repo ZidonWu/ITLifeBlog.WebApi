@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,10 +16,11 @@ namespace DAL.Entities
 
         public string Description { get; set; }
 
-        public int? Order { get; set; }
+        public int Order { get; set; }
 
-        public int? Count { get; set; }  
+        public int Count { get; set; }
 
-        public virtual ICollection<Article> Articles { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<Article> Article { get; set; }   
     }
 }

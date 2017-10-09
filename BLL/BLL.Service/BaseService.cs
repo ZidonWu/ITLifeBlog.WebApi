@@ -204,5 +204,17 @@ namespace BLL.Service
             }
             return result;
         }
+
+        public Paging<T> FindPageList(Paging<T> paging)
+        {
+            paging.Items = Repository.FindPageList(paging.PageSize, paging.PageIndex, out paging.TotalNumber).ToList();
+            return paging;
+        }
+
+        public Paging<T> FindPageList(Paging<T> paging, bool order)
+        {
+            paging.Items = Repository.FindPageList(paging.PageSize, paging.PageIndex, out paging.TotalNumber, order).ToList();
+            return paging;
+        }
     }
 }

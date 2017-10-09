@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using COM.Common;
 using System.Linq.Expressions;
+using BLL.Service.CategorySer;
+using BLL.Service.AccountSer;
 
 namespace BLL.Service.ArticleSer
 {
@@ -22,13 +24,13 @@ namespace BLL.Service.ArticleSer
                 Description = model.Description,
                 Content = model.Content,
                 CommentNum = model.CommentNum,
-                CreateTime = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd")),
+                CreateTime = model.CreateTime,
                 IsPublish = model.IsPublish,
                 IsDeleted = false,
                 LastUpdateTime = model.LastUpdateTime,
                 ReadNum = model.ReadNum,
                 Stars = model.Stars,
-                UserId = model.UserId,
+                AccountId = model.AccountId,
                 CategoryId = model.CategoryId
             };
             var result = base.Add(article);
@@ -45,9 +47,9 @@ namespace BLL.Service.ArticleSer
             return Repository.Count(where);
         }
 
-        public int CountArticleByUserName(string name)  
+        public int CountArticleByAccountName(string accountName)  
         {
-            return Repository.Count(x => x.User.Name == name);
+            return Repository.Count(x => x.Account.Name == accountName);
         }
 
         public IEnumerable<Article> FindAllList()
@@ -60,9 +62,54 @@ namespace BLL.Service.ArticleSer
             return Repository.FindList(where).Where(x => x.IsDeleted == false);
         }
 
-        public IEnumerable<Article> FindListByUserName(string name)
+        public IEnumerable<Article> FindListByAccountId(int accountId)
         {
-            return Repository.FindList(x => x.User.Name == name).Where(y => y.IsDeleted == false);
+            return Repository.FindList(x => x.Account.Id == accountId).Where(y => y.IsDeleted == false);
+        }       
+
+        public IEnumerable<Article> FindListByAccountName(string accountName)
+        {
+            return Repository.FindList(x => x.Account.Name == accountName).Where(y => y.IsDeleted == false);
+        }
+
+        public IQueryable<Article> FindPageList(Paging<Article> paging, string where = "")
+        {
+            IQueryable<Article> _list = Repository.FindList();
+            if (!string.IsNullOrEmpty(where))
+            {
+                _list = _list.Where(b => b.Title.Contains(where));
+            }
+            _list = _list.OrderByDescending(b => b.CreateTime);
+            paging.TotalNumber = _list.Count();
+            return _list.Skip((paging.PageIndex - 1) * paging.PageSize).Take(paging.PageSize);
+        }
+
+        public IQueryable<Article> FindPageList(Paging<Article> paging, int categoryId = -1)
+        {
+            CategoryService categoryService = new CategoryService();
+            Category category = categoryService.Find(categoryId);
+            IQueryable<Article> _list = Repository.FindList().Where(b => b.IsPublish);
+            if (category != null)
+            {
+                _list = _list.Where(b => b.Category.Id == category.Id);
+            }
+            _list = _list.OrderByDescending(b => b.CreateTime);
+            paging.TotalNumber = _list.Count();
+            return _list.Skip((paging.PageIndex - 1) * paging.PageSize).Take(paging.PageSize);
+        }
+
+        public IQueryable<Article> FindPageListByAccountId(Paging<Article> paging, int accountId)
+        {
+            AccountService accountService = new AccountService();
+            Account account = accountService.Find(accountId);
+            IQueryable<Article> _list = Repository.FindList().Where(b => b.IsPublish);
+            if (account != null)
+            {
+                _list = _list.Where(b => b.Account.Id == account.Id);
+            }
+            _list = _list.OrderByDescending(b => b.CreateTime);
+            paging.TotalNumber = _list.Count();
+            return _list.Skip((paging.PageIndex - 1) * paging.PageSize).Take(paging.PageSize);
         }
 
         public OperResult UpdateByDelete(int id, Expression<Func<Article, bool>> where)

@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,6 +11,7 @@ namespace DAL.Entities
     /// <summary>
     /// 文章类
     /// </summary>
+    [KnownType(typeof(Article))]
     public class Article : EntityBase
     {
         public string ArticleGuid { get; set; }
@@ -33,15 +36,15 @@ namespace DAL.Entities
 
         public bool IsDeleted { get; set; }
 
-        public int UserId { get; set; }
+        public int AccountId { get; set; }
 
-        public int CategoryId { get; set; } 
+        public int CategoryId { get; set; }
 
-        public virtual User User { get; set; }
+        [JsonIgnore]
+        public virtual Account Account { get; set; }
 
+        [JsonIgnore]
         public virtual Category Category { get; set; }
-
-        public virtual ICollection<ArticleComment> ArticleComments { get; set; }
 
     }
 }

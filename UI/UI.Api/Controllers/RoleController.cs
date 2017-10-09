@@ -46,7 +46,7 @@ namespace UI.Api.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpPut]
+        [HttpPost]
         public OperResult UpdateById(int id)
         {
             var result = _roleService.Update(id);
@@ -58,7 +58,7 @@ namespace UI.Api.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpDelete]
+        [HttpPost]
         public OperResult DeleteById(int id)
         {
             var result = _roleService.Delete(id);

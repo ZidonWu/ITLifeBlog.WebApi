@@ -43,6 +43,11 @@ namespace UI.Api.Controllers
             return result;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         [HttpGet]
         public User GetByName(string name)
         {
@@ -66,7 +71,7 @@ namespace UI.Api.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpPut]
+        [HttpPost]
         public OperResult UpdateById(int id)
         {
             var result = _userService.Update(id);
@@ -78,7 +83,7 @@ namespace UI.Api.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpDelete]
+        [HttpPost]
         public OperResult DeleteById(int id)
         {
             var result = _userService.Delete(id);

@@ -23,6 +23,7 @@ namespace UI.Api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [AllowAnonymous]
         public IEnumerable<Category> GetAllList()
         {
             var result = _categoryService.FindList();
@@ -41,12 +42,19 @@ namespace UI.Api.Controllers
             return result;
         }
 
+        [HttpGet]
+        public Category GetById(int id)
+        {
+            var result = _categoryService.Find(id);
+            return result;
+        }
+
         /// <summary>
         /// 根据id更新指定的分类
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpPut]
+        [HttpPost]
         public OperResult UpdateById(int id)
         {
             var result = _categoryService.Update(id);
@@ -58,10 +66,18 @@ namespace UI.Api.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpDelete]
+        [HttpPost]
         public OperResult DeleteById(int id)
         {
             var result = _categoryService.Delete(id);
+            return result;
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public OperResult Update([FromBody]Category category)
+        {
+            var result = _categoryService.Update(category);
             return result;
         }
     }

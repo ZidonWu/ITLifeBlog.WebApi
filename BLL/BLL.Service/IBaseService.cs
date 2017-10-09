@@ -45,5 +45,8 @@ namespace BLL.Service
         OperResult Delete(int id);
         OperResult Delete(T entity);
         OperResult Delete(Expression<Func<T, bool>> where);
+
+        Paging<T> FindPageList(Paging<T> paging);
+        Paging<T> FindPageList(Paging<T> paging, bool order);
     }
 }

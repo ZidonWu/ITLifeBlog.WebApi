@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="OperResult.cs" />
     <Compile Include="OrderParam.cs" />
+    <Compile Include="Paging.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
