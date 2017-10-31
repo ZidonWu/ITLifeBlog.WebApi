@@ -1,4 +1,5 @@
-﻿using BLL.Service.ArticleSer;
+﻿using BLL.Contract;
+using BLL.Service.ArticleSer;
 using COM.Common;
 using DAL.Entities;
 using System;
@@ -28,7 +29,7 @@ namespace UI.Api.Controllers
         [AllowAnonymous]
         public IEnumerable<Article> GetAllList()
         {
-            var result = _articleService.FindAllList();
+            var result = _articleService.FindAllList().ToList();
             return result;
         }
 
@@ -38,7 +39,7 @@ namespace UI.Api.Controllers
         /// <param name="accountId"></param>
         /// <returns></returns>
         [HttpGet]
-        public IEnumerable<Article> GetListByAccountId(int accountId)
+        public IEnumerable<ArticleModel> GetListByAccountId(int accountId)
         {
             var result = _articleService.FindListByAccountId(accountId);
             return result;
@@ -78,6 +79,19 @@ namespace UI.Api.Controllers
         public Article GetById(int id)
         {
             var result = _articleService.Find(id);
+            return result;
+        }
+
+        /// <summary>
+        /// 根据Guid查询文章
+        /// </summary>
+        /// <param name="guid"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [AllowAnonymous]
+        public Article GetByGuid(string guid)
+        {   
+            var result = _articleService.Find(x=>x.ArticleGuid == guid);
             return result;
         }
 

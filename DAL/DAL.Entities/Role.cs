@@ -1,7 +1,9 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,7 +18,6 @@ namespace DAL.Entities
 
         public string Description { get; set; }
 
-        [JsonIgnore]
-        public virtual ICollection<Account> Account { get; set; }       
+        //public virtual ICollection<Account> Account { get; set; }       
     }
 }

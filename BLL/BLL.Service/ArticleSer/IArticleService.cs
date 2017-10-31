@@ -1,3 +1,4 @@
+using BLL.Contract;
 using COM.Common;
 using DAL.Entities;
 using System;
@@ -21,7 +22,7 @@ namespace BLL.Service.ArticleSer
         /// </summary>
         /// <param name="accountId"></param>
         /// <returns></returns>
-        IEnumerable<Article> FindListByAccountId(int accountId);
+        IEnumerable<ArticleModel> FindListByAccountId(int accountId);
 
         /// <summary>
         /// 根据帐户名获取文章集合

@@ -14,6 +14,8 @@ namespace DAL.Core
         public ITLifeBlogDbContext():base("name=ITLifeBlog")
         {
             //this.Configuration.LazyLoadingEnabled = true;
+            //this.Configuration.LazyLoadingEnabled = false;
+            //this.Configuration.ProxyCreationEnabled = false;
         }
 
         public DbSet<Account> Accounts { get; set; }
@@ -26,13 +28,15 @@ namespace DAL.Core
 
         //public DbSet<User> Users { get; set; }
 
-        public DbSet<Category> Categories { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
 
         //public DbSet<Message> Messages { get; set; }
 
         //public DbSet<Mood> Moods { get; set; }
 
         //public DbSet<MoodComment> MoodComments { get; set; }
+            
+        public virtual DbSet<Role> Roles { get; set; }
 
         public int Commit()
         {

@@ -8,6 +8,7 @@ using COM.Common;
 using System.Linq.Expressions;
 using BLL.Service.CategorySer;
 using BLL.Service.AccountSer;
+using BLL.Contract;
 
 namespace BLL.Service.ArticleSer
 {
@@ -47,7 +48,7 @@ namespace BLL.Service.ArticleSer
             return Repository.Count(where);
         }
 
-        public int CountArticleByAccountName(string accountName)  
+        public int CountArticleByAccountName(string accountName)
         {
             return Repository.Count(x => x.Account.Name == accountName);
         }
@@ -62,10 +63,28 @@ namespace BLL.Service.ArticleSer
             return Repository.FindList(where).Where(x => x.IsDeleted == false);
         }
 
-        public IEnumerable<Article> FindListByAccountId(int accountId)
+        public IEnumerable<ArticleModel> FindListByAccountId(int accountId)
         {
-            return Repository.FindList(x => x.Account.Id == accountId).Where(y => y.IsDeleted == false);
-        }       
+            var result = Repository.FindList(x => x.Account.Id == accountId).Where(y => y.IsDeleted == false);
+            List<ArticleModel> list = new List<ArticleModel>();
+            ArticleModel articleModel = new ArticleModel();
+            foreach (var item in result)
+            {
+
+                articleModel.Content = item.Content;
+                articleModel.CreateTime = item.CreateTime;
+                articleModel.Description = item.Description;
+                articleModel.Id = item.Id;
+                articleModel.ArticleGuid = item.ArticleGuid;
+                articleModel.IsDeleted = item.IsDeleted;
+                articleModel.IsPublish = item.IsPublish;
+                articleModel.Title = item.Title;
+                articleModel.AccountId = item.AccountId;
+                articleModel.CategoryId = item.CategoryId;
+                list.Add(articleModel);
+            }
+            return list;
+        }
 
         public IEnumerable<Article> FindListByAccountName(string accountName)
         {

@@ -1,4 +1,5 @@
-﻿using COM.Common;
+﻿using BLL.Contract;
+using COM.Common;
 using DAL.Entities;
 using System;
 using System.Collections.Generic;
@@ -24,5 +25,11 @@ namespace BLL.Service.AccountSer
         /// <param name="name"></param>
         /// <returns></returns>
         Account Find(string name);
+
+        /// <summary>
+        /// 查询用户集合
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<AccountModel> FindListAccount(); 
     }
 }

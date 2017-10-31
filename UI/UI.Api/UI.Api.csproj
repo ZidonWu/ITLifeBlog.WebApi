@@ -306,6 +306,10 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\BLL\BLL.Contract\BLL.Contract.csproj">
+      <Project>{6AFE13DC-644D-4FEC-82F3-A40A45512148}</Project>
+      <Name>BLL.Contract</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\BLL\BLL.Service\BLL.Service.csproj">
       <Project>{CD2810AF-3F64-4486-A255-3E5D5446900D}</Project>
       <Name>BLL.Service</Name>

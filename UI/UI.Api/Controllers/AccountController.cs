@@ -1,4 +1,5 @@
-﻿using BLL.Service.AccountSer;
+﻿using BLL.Contract;
+using BLL.Service.AccountSer;
 using COM.Common;
 using DAL.Entities;
 using System;
@@ -44,7 +45,7 @@ namespace UI.Api.Controllers
             FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(0, name, DateTime.Now, DateTime.Now.AddHours(1), true, string.Format("{0}&{1}", name, password), FormsAuthentication.FormsCookiePath);
 
             var account = _accountService.Find(name);
-            var oAccount = new LoginViewModel { Id = account.Id, Name = name, Password = password, BRes = true, Ticket = FormsAuthentication.Encrypt(ticket), RoleId = account.Role.Id};
+            var oAccount = new LoginViewModel { Id = account.Id, Name = name, Password = password, BRes = true, Ticket = FormsAuthentication.Encrypt(ticket), RoleId = account.Role.Id };
             HttpContext.Current.Session[name] = oAccount;
             return oAccount;
         }
@@ -66,9 +67,10 @@ namespace UI.Api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [AllowAnonymous]
         public IEnumerable<Account> GetAllList()
         {
-            var result = _accountService.FindList();
+            var result = _accountService.FindList().ToList();
             if (result == null)
             {
                 return null;
@@ -97,7 +99,7 @@ namespace UI.Api.Controllers
         public Account GetByName(string name)
         {
             var result = _accountService.Find(name);
-            return result;
+            return result;  
         }
 
         /// <summary>

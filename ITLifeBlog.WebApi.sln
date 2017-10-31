@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.15
+VisualStudioVersion = 15.0.27004.2005
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DAL", "DAL", "{065AEB1A-D080-41FA-8736-BC6474FDFA96}"
 EndProject
@@ -26,6 +26,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL.Service", "BLL\BLL.Service\BLL.Service.csproj", "{CD2810AF-3F64-4486-A255-3E5D5446900D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI.Api", "UI\UI.Api\UI.Api.csproj", "{8A182600-D1D7-4DF7-B83E-4B3FF25A0718}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL.Contract", "BLL\BLL.Contract\BLL.Contract.csproj", "{6AFE13DC-644D-4FEC-82F3-A40A45512148}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -65,6 +67,10 @@ Global
 		{8A182600-D1D7-4DF7-B83E-4B3FF25A0718}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8A182600-D1D7-4DF7-B83E-4B3FF25A0718}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8A182600-D1D7-4DF7-B83E-4B3FF25A0718}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6AFE13DC-644D-4FEC-82F3-A40A45512148}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AFE13DC-644D-4FEC-82F3-A40A45512148}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AFE13DC-644D-4FEC-82F3-A40A45512148}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AFE13DC-644D-4FEC-82F3-A40A45512148}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -78,6 +84,7 @@ Global
 		{55DA171C-B4B4-44C7-AFB7-B9B674BB2B52} = {AC286659-F090-4EF6-A1F4-C16B7C963ECA}
 		{CD2810AF-3F64-4486-A255-3E5D5446900D} = {AC286659-F090-4EF6-A1F4-C16B7C963ECA}
 		{8A182600-D1D7-4DF7-B83E-4B3FF25A0718} = {F4C0070B-D068-42BF-8281-CDC9F0AAE373}
+		{6AFE13DC-644D-4FEC-82F3-A40A45512148} = {AC286659-F090-4EF6-A1F4-C16B7C963ECA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2930370E-9942-4A99-85C6-A1DA30A65722}

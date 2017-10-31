@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
@@ -11,7 +12,6 @@ namespace DAL.Entities
     /// <summary>
     /// 文章类
     /// </summary>
-    [KnownType(typeof(Article))]
     public class Article : EntityBase
     {
         public string ArticleGuid { get; set; }
@@ -40,10 +40,8 @@ namespace DAL.Entities
 
         public int CategoryId { get; set; }
 
-        [JsonIgnore]
         public virtual Account Account { get; set; }
 
-        [JsonIgnore]
         public virtual Category Category { get; set; }
 
     }
